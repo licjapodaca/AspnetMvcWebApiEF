@@ -14,4 +14,12 @@ En este hands-on lab, aprenderas como:
 - Entity Framework 6
 - SQL Server Express Edition (localdb)
 
+> **NOTA:** En caso de no contar con Visual Studio 2017, favor de descargar o clonar este proyecto y una vez alojado localmente, crear una solucion en el directorio raiz con la version de Visual Studio con la que se cuente y agregar la referencia de los subproyectos a dicha solución.
+
+Preparación de la solución:
+
+1. En caso de no contar con la version de VS2017, seguir la NOTA anterior.
+2. Una vez descargado y abierta la solución en Visual Studio proceder a restablecer todo paquete faltante a nivel solucion como se muestra en la siguiente imagen:
+
 ![Image001](AspnetMvcEvents.Web/Resources/Images/image001.png)
+
