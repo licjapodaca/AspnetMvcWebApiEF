@@ -12,7 +12,7 @@ Realizar los siguientes ejercicios del hands-on lab:
 
 > Tiempo estimado para terminar este hands-on lab: **120 minutos**
 
-##### 1. Preparar la solución web con la conexión hacia la base de datos
+#### 1. Preparar la solución web con la conexión hacia la base de datos
 
 1.1 Se procede a instalar Entity Framework mediante *NuGet Packages* dando click derecho sobre el proyecto **AspnetMvcEvents.Web** seleccionando la opcion **`Manage NuGet Packages`**
 
