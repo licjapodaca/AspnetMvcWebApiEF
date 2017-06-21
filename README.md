@@ -23,7 +23,7 @@ Preparación de la solución:
 
 ![Image001](AspnetMvcEvents.Web/Resources/Images/image001.png)
 
-3. Una vez preparada la solución, se procede a dar inicio a las instrucciones del **"Hands-on Lab"** dando **[CLICK AQUI](AspnetMvcEvents.Web/Readme.md)**
+3. Una vez preparada la solución, se procede a dar inicio a las instrucciones del **"Hands-on Lab"** dando **[CLICK AQUI](AspnetMvcEvents.Web#Hands-On-Lab)**
 
 #### Autor del Hands-on Lab:
 
