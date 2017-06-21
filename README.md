@@ -23,12 +23,12 @@ Preparación de la solución:
 
 ![Image001](AspnetMvcEvents.Web/Resources/Images/image001.png)
 
-3. Una vez preparada la solución, se procede a dar inicio a las instrucciones del **"Hands-on Lab"** dando click aqui [HandsOnLab-01](AspnetMvcEvents.Web/HandsOnLab-01.md)
+3. Una vez preparada la solución, se procede a dar inicio a las instrucciones del **"Hands-on Lab"** dando **[CLICK AQUI](AspnetMvcEvents.Web/Readme.md)**
 
-Autor del Hands-on Lab:
+#### Autor del Hands-on Lab:
 
 - **Nombre:** M.C.S.D. Jorge Apodaca
 - **Título:** Microsoft Certified Solutions Developer
-- **Website:** https://jorge-apodaca.net
+- **Website:** https://github.com/licjapodaca
 - **Email:** mcsd@jorge-apodaca.net
 - **Twitter:** @licjapodaca
