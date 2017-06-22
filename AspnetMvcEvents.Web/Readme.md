@@ -8,8 +8,8 @@ Se procedera a crear un sitio web basado en ***ASP.NET MVC***, en donde se lleve
 
 Realizar los siguientes ejercicios del hands-on lab:
 
-1. [Preparar la solución para la conexión hacia la base de datos](http://#)
-2. [Creando la base de datos por medio de Migrations de Entity Framework](http://#)
+1. [Preparar la solución para la conexión hacia la base de datos](#1-preparar-la-solución-para-la-conexión-hacia-la-base-de-datos)
+2. [Creando la base de datos por medio de Migrations de Entity Framework](#2-creando-la-base-de-datos-por-medio-de-migrations-de-entity-framework)
 3. [Finalmente compilar la version ejecutar el resultado final.](http://#)
 
 > Tiempo estimado para terminar este hands-on lab: **120 minutos**
@@ -262,6 +262,6 @@ Presentadores:
 
 ![image014](Resources/Images/image014.png)
 
-3. Finalmente compilar la version ejecutar el resultado final.
+#### 3. Finalmente compilar la version ejecutar el resultado final.
 
 Aqui termina el Hands-on Lab de ASP.NET MVC con Entity Framework.
