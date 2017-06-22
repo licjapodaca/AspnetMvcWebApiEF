@@ -44,9 +44,10 @@ Texto en archivo `web.config`
 
 ![image005](Resources/Images/image005.png)
 
-1.7 Ya creadas las carpetas se procede a crear el contexto donde estaran especificadas las entidades que representaran a las tablas fisicas a nivel base de datos (Proceso de Mapping de Entity Framework), crear una clase denominada "EventsContext.cs" dentro del folder "Context" con el siguiente código:
+1.7 Ya creadas las carpetas se procede a crear el contexto donde estaran especificadas las entidades que representaran a las tablas fisicas a nivel base de datos (Proceso de Mapping de Entity Framework), crear una clase denominada **"EventsContext.cs"** dentro del folder **"Context"** con el siguiente código:
 
 ```csharp
+using AspnetMvcEvents.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -56,20 +57,188 @@ using System.Threading.Tasks;
 
 namespace AspnetMvcEvents.Data.Context
 {
-	public class EventsContext : DbContext
-	{
-		public EventsContext()
-			: base("AspnetMvcEvents") { }
+    public class EventsContext : DbContext
+    {
+        public EventsContext()
+            : base("AspnetMvcEvents") { }
 
 		#region Entidades por IDbSet
+
+		public IDbSet<Event> Events { get; set; }
+		public IDbSet<Presenter> Presenters { get; set; }
 
 		#endregion
 	}
 }
 ```
 
-1.x Habilitar Migrations de EF sobre el proyecto *AspnetMvcEvents.Data* ejecutando la siguiente instruccion por medio de **Package Manager Console** habilitandolo dando la siguiente combinacion **`Ctrl+Q`**, esribir `package` en el Quick Launch y seleccionar la primera opcion:
+1.8	Posteriormente se proceden a crear las entidades que estaran ligadas por medio de EF hacia su respectiva tabla de base de datos como lo es **Event** y **Presenter** dentro de la carpeta **Entities** con el siguiente codigo respectivamente:
+
+![image006](Resources/Images/image006.png)
+
+```csharp
+/*************************
+Modelo o Entidad Event.cs
+**************************/
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AspnetMvcEvents.Data.Entities
+{
+	public class Event
+	{
+		public Event()
+		{
+			this.IsPublic = true;
+			this.StartDateTime = DateTime.Now;
+		}
+
+		public int Id { get; set; }
+
+		[Required]
+		[MaxLength(200)]
+		public string Title { get; set; }
+
+		[Required]
+		public DateTime StartDateTime { get; set; }
+
+		[Required]
+		public TimeSpan? Duration { get; set; }
+		
+		[Required]
+		public virtual int PresenterId { get; set; }
+
+		[MaxLength(500)]
+		public string Description { get; set; }
+
+		[MaxLength(200)]
+		public string Location { get; set; }
+
+		public bool IsPublic { get; set; }
+
+		[ForeignKey("PresenterId")]
+		public virtual Presenter Presenter { get; set; }
+	}
+}
+```
+
+```csharp
+/******************************
+Modelo o Entidad Presenter.cs
+*******************************/
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AspnetMvcEvents.Data.Entities
+{
+	public class Presenter
+	{
+		public Presenter() { }
+
+		public int Id { get; set; }
+		[Required]
+		[MaxLength(20)]
+		public string Name { get; set; }
+		[Required]
+		[MaxLength(30)]
+		public string Lastname { get; set; }
+		[Required]
+		[MaxLength(500)]
+		public string ProfessionalSkills { get; set; }
+
+		public virtual ICollection<Event> Events { get; set; }
+	}
+}
+```
+
+1.9 Una vez habilitado el contexto donde estaran definiendose las entidades que representaran a las tablas de una base de datos, se procede a habilitar Migrations de EF sobre el proyecto *AspnetMvcEvents.Data* ejecutando la siguiente instruccion por medio de **Package Manager Console** que se abre dando la siguiente combinacion de teclas **`Ctrl+Q`** esribiendo `package` en el **"Quick Launch"** y seleccionar la primera opcion:
+
+![image007](Resources/Images/image007.png)
+
+La instrucción a ejecutar es la siguiente:
+```
+PM> Enable-Migrations -ProjectName AspnetMvcEvents.Data -StartUpProjectName AspnetMvcEvents.Data -ConnectionStringName AspnetMvcEvents -Verbose
+```
+
+2. Creando la base de datos por medio de Migrations de Entity Framework
+
+2.1 Una vez habilitado Migrations de EF, aparecera una nueva carpeta en el proyecto **"AspnetMvcEvents.Data"** denominada **"Migrations"** el cual contiene la clase "Configuration.cs" que definira el comportamiento de instrucciones realizadas para Migrations de EF. Se procede a modificar las lineas de codigo como aparecen en la siguiente imagen:
+
+![imagen008](Resources/Images/image008.png)
+
+2.2 Agregar inyeccion de datos iniciales en las entidades **Event** y **Presenter** en el metodo ***Seed*** del mismo archivo ***Configuration.cs*** con el siguiente codigo:
+
+```csharp
+protected override void Seed(AspnetMvcEvents.Data.Context.EventsContext context)
+{
+	context.Presenters.AddOrUpdate(p => p.Name,
+		new Presenter
+		{
+			Name = "Jorge Mario",
+			Lastname = "Apodaca Mendoza",
+			ProfessionalSkills = "Skills in TFS, Sencha ExtJS, C#, Oracle, SQL Server, CI/CD, DevOps, SCRUM, AWS, Azure",
+			Events = new List<Event>()
+			{
+				new Event { Title = "Curso de ASP.NET MVC", Description = "Curso de ASP.NET MVC", Duration = TimeSpan.Parse("4:00"), IsPublic = true, Location = "Mexicali, B.C." },
+				new Event { Title = "Team Foundation Server", Description = "Curso de Team Foundation Server", Duration = TimeSpan.Parse("6:00"), IsPublic = true, Location = "Guadalajara, Jalisco" }
+			}
+		},
+		new Presenter
+		{
+			Name = "Ricardo",
+			Lastname = "Lopez Medina",
+			ProfessionalSkills = "Office 365, TFS",
+			Events = new List<Event>()
+			{
+				new Event { Title = "Curso de Office 365", Description = "Curso de Office 365", Duration = TimeSpan.Parse("2:00"), IsPublic = false, Location = "Mexicali, B.C." },
+				new Event { Title = "Curso de Nominas", Description = "Curso de Nominas", Duration = TimeSpan.Parse("1:30"), IsPublic = true, Location = "C.D. de Mexico" }
+			}
+		});
+}
+```
+
+2.3 Una vez especificada la inyeccion de datos prueba, para asegurarnos de que pueda ejecutarse dicha inyeccion o cualquier modificacion a las entidades sea ejecutada toda instruccion automaticamente, debemos especificar la siguiente instruccion dentro del metodo **Application_Start** en el archivo **"Global.asax"** dentro del proyecto **"AspnetMvcEvents.Web"**:
+
+```csharp
+Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventsContext, Configuration>());
+```
+
+2.4 La instruccion anterior marcara error debido a que hace falta una referencia hacia el proyecto AspnetMvcEvents.Data dentro del proyecto **"AspnetMvcEvents.Web"**. Una vez realizada la referencia corregir el error agregando su respectivo "using" en codigo fuente. Adicionalmente modificar el tipo de clase del archivo "Configuration.cs" dentro del folder Migrations a como sigue:
+
+```csharp
+// ANTES
+internal sealed class Configuration : DbMigrationsConfiguration<AspnetMvcEvents.Data.Context.EventsContext>
+```
+
+```csharp
+// DESPUES
+public class Configuration : DbMigrationsConfiguration<AspnetMvcEvents.Data.Context.EventsContext>
+```
+
+2.5 Se procede a generar el archivo de Migrations con todo cambio que se tenga al momento de las entidades o instrucciones por Fluent API ejecutando la siguiente instruccion en **"Package Manager Console"** como sigue:
 
 ```
-PM> 
+PM> Add-Migration -Name EstructuraInicial -ProjectName AspnetMvcEvents.Data -StartUpProjectName AspnetMvcEvents.Data -ConnectionStringName AspnetMvcEvents -Verbose
 ```
+
+2.6 El punto anterior abrira el archivo de Migrations generando las instrucciones debidas para generar ya sea un archivo SQL o ejecutar directamente en la base de datos dichas instrucciones de adicion o alteracion. Ahora, procedemos a ejecutar directamente en la Base de Datos las instrucciones del archivo que acabamos de generar de Migrations corriendo la siguiente instruccion en **"Package Manager Console"**:
+
+```
+PM> Update-Database -ProjectName AspnetMvcEvents.Data -StartUpProjectName AspnetMvcEvents.Data -ConnectionStringName AspnetMvcEvents -Verbose
+```
+
+2.7 La instruccion anterior creara la estructura de tablas iniciales en la base de datos por lo que se puede comprobar abriendo la opcion **"SQL Server Object Explorer"** ubicado en el manu **"View"** como se muestra en la siguiente imagen:
+
+![image010](Resources/Images/image010.png)
+
+![image011](Resources/Images/image011.png)
+

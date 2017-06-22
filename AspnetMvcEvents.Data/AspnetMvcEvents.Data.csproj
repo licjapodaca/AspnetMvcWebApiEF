@@ -50,11 +50,21 @@
     <Compile Include="Context\EventsContext.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\Presenter.cs" />
+    <Compile Include="Migrations\201706220717452_EstructuraInicial.cs" />
+    <Compile Include="Migrations\201706220717452_EstructuraInicial.Designer.cs">
+      <DependentUpon>201706220717452_EstructuraInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706220717452_EstructuraInicial.resx">
+      <DependentUpon>201706220717452_EstructuraInicial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -29,7 +29,7 @@ namespace AspnetMvcEvents.Data.Entities
 		public TimeSpan? Duration { get; set; }
 		
 		[Required]
-		public virtual Presenter PresenterId { get; set; }
+		public virtual int PresenterId { get; set; }
 
 		[MaxLength(500)]
 		public string Description { get; set; }
@@ -40,6 +40,6 @@ namespace AspnetMvcEvents.Data.Entities
 		public bool IsPublic { get; set; }
 
 		[ForeignKey("PresenterId")]
-		public virtual ICollection<Presenter> Presenter { get; set; }
+		public virtual Presenter Presenter { get; set; }
 	}
 }

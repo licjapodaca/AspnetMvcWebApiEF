@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AspnetMvcEvents.Data.Entities;
+using AspnetMvcEvents.Data.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace AspnetMvcEvents.Data.Context
         public EventsContext()
             : base("AspnetMvcEvents") { }
 
-        #region Entidades por IDbSet
+		#region Entidades por IDbSet
 
-        #endregion
-    }
+		public IDbSet<Event> Events { get; set; }
+		public IDbSet<Presenter> Presenters { get; set; }
+
+		#endregion
+	}
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using AspnetMvcEvents.Data.Context;
+using AspnetMvcEvents.Data.Migrations;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,7 +15,9 @@ namespace AspnetMvcEvents.Web
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<EventsContext, Configuration>());
+
+			AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
