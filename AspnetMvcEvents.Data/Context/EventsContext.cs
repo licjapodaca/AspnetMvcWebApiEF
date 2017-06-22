@@ -16,8 +16,8 @@ namespace AspnetMvcEvents.Data.Context
 
 		#region Entidades por IDbSet
 
-		public IDbSet<Event> Events { get; set; }
-		public IDbSet<Presenter> Presenters { get; set; }
+		public DbSet<Event> Events { get; set; }
+		public DbSet<Presenter> Presenters { get; set; }
 
 		#endregion
 	}

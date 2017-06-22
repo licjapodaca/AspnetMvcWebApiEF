@@ -8,7 +8,9 @@ Se procedera a crear un sitio web basado en ***ASP.NET MVC***, en donde se lleve
 
 Realizar los siguientes ejercicios del hands-on lab:
 
-1. Preparar la solución para la conexión hacia la base de datos
+1. [Preparar la solución para la conexión hacia la base de datos](http://#)
+2. [Creando la base de datos por medio de Migrations de Entity Framework](http://#)
+3. [Finalmente compilar la version ejecutar el resultado final.](http://#)
 
 > Tiempo estimado para terminar este hands-on lab: **120 minutos**
 
@@ -62,10 +64,10 @@ namespace AspnetMvcEvents.Data.Context
         public EventsContext()
             : base("AspnetMvcEvents") { }
 
-		#region Entidades por IDbSet
+		#region Entidades por DbSet
 
-		public IDbSet<Event> Events { get; set; }
-		public IDbSet<Presenter> Presenters { get; set; }
+		public DbSet<Event> Events { get; set; }
+		public DbSet<Presenter> Presenters { get; set; }
 
 		#endregion
 	}
@@ -169,7 +171,7 @@ La instrucción a ejecutar es la siguiente:
 PM> Enable-Migrations -ProjectName AspnetMvcEvents.Data -StartUpProjectName AspnetMvcEvents.Data -ConnectionStringName AspnetMvcEvents -Verbose
 ```
 
-2. Creando la base de datos por medio de Migrations de Entity Framework
+#### 2. Creando la base de datos por medio de Migrations de Entity Framework
 
 2.1 Una vez habilitado Migrations de EF, aparecera una nueva carpeta en el proyecto **"AspnetMvcEvents.Data"** denominada **"Migrations"** el cual contiene la clase "Configuration.cs" que definira el comportamiento de instrucciones realizadas para Migrations de EF. Se procede a modificar las lineas de codigo como aparecen en la siguiente imagen:
 
@@ -242,3 +244,24 @@ PM> Update-Database -ProjectName AspnetMvcEvents.Data -StartUpProjectName Aspnet
 
 ![image011](Resources/Images/image011.png)
 
+2.8 Posteriormente generamos un CRUD completo con la ayuda de la operacion "scafold de ASP.NET MVC" dando click derecho sobre el folder "Controllers" del proyecto "AspnetMvcEvents.Web" despues ir a **"Add"** y seleccionar la primer opcion **"controller"**, lo anterior abrira una ventana para seleccionar el tipo de template con el cual creara el CRUD completo en base a la entidad que seleccionemos, seleccionar el template **"MVC 5 Controllers with view using Entity Framework"** y posteriormente llenar los datos en base a la siguiente imagen:
+
+Eventos:
+![image012](Resources/Images/image012.png)
+
+Presentadores:
+![image013](Resources/Images/image013.png)
+
+2.9 Por ultimo agregamos los enlaces en la pagina principal que van directamente a los dos CRUD "Events" y "Presenters" agregando las siguientes lineas en el archivo **"_Layout.cshtml"** que se encuentra en el proyecto **"AspnetMvcEvents.Web"** bajo el folder **"Views\Shared"**:
+
+```html
+<li>@Html.ActionLink("Presenters", "Index", "Presenters")</li>
+<li>@Html.ActionLink("Events", "Index", "Events")</li>
+```
+>**NOTA:** Las lineas anteriores deberan ir ubicadas dentro de la seccion de navegacion de la pagina principal como aparece en la siguiente imagen...
+
+![image014](Resources/Images/image014.png)
+
+3. Finalmente compilar la version ejecutar el resultado final.
+
+Aqui termina el Hands-on Lab de ASP.NET MVC con Entity Framework.
