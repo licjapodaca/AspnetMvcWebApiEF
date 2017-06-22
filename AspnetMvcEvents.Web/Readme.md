@@ -10,7 +10,7 @@ Realizar los siguientes ejercicios del hands-on lab:
 
 1. [Preparar la solución para la conexión hacia la base de datos](#1-preparar-la-solución-para-la-conexión-hacia-la-base-de-datos)
 2. [Creando la base de datos por medio de Migrations de Entity Framework](#2-creando-la-base-de-datos-por-medio-de-migrations-de-entity-framework)
-3. [Finalmente compilar la version ejecutar el resultado final.](http://#)
+3. [Finalmente compilar la version ejecutar el resultado final.](#3-finalmente-compilar-la-version-ejecutar-el-resultado-final)
 
 > Tiempo estimado para terminar este hands-on lab: **120 minutos**
 
